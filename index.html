@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>TextareaField</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./dist/TextareaField.css">
+    </head>
+    <body>
+        <form id="app" class="container">
+            <h1 class="mb-5">textarea-field</h1>
+
+            <h2>Basic Usage</h2>
+
+            <textarea-field label="Text Field" placeholder="Some placeholder"></textarea-field>
+            <textarea-field label="Descriptive Text Field" help-text="Some helpful text goes here."></textarea-field>
+            <textarea-field label="Plain Text" placeholder="Type something here..." plaintext></textarea-field>
+            <textarea-field label="Readonly" placeholder="Type something here..." readonly></textarea-field>
+
+            <hr>
+
+            <h2>Sizes</h2>
+
+            <textarea-field size="sm" placeholder="Small"></textarea-field>
+            <textarea-field size="md" placeholder="Medium"></textarea-field>
+            <textarea-field size="lg" placeholder="Large"></textarea-field>
+
+            <h3>Custom Fields</h3>
+            <textarea-field size="sm" label="Small" placeholder="Small" custom></textarea-field>
+            <textarea-field size="md" label="Medium" placeholder="Medium" custom></textarea-field>
+            <textarea-field size="lg" label="Large" placeholder="Large" custom></textarea-field>
+
+            <hr>
+
+            <h2>Activity Indicator</h2>
+
+            <textarea-field size="sm" placeholder="Small" :activity="showActivity"></textarea-field>
+            <textarea-field size="md" placeholder="Medium" :activity="showActivity"></textarea-field>
+            <textarea-field size="lg" placeholder="Large" :activity="showActivity"></textarea-field>
+
+            <button type="button" @click="showActivity = !showActivity">
+                <span v-if="!showActivity">Show</span><span v-else>Hide</span> Activity
+            </button>
+
+            <hr>
+
+            <h2>Validation</h2>
+
+            <textarea-field label="Single Inline Error" error="This is an inline error."></textarea-field>
+
+            <textarea-field name="test" label="Multiple Errors From Object" :errors="{'test': ['This is an inline error #1.', 'This is an inline error #2.']}"></textarea-field>
+        </form>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+        <script type="text/javascript" src="./dist/TextareaField.umd.js"></script>
+        <script type="text/javascript">
+            const vue = new Vue({
+                el: '#app',
+                components: {
+                    TextareaField
+                },
+                data() {
+                    return {
+                        showActivity: false,
+                        value: null
+                    };
+                }
+            });
+        </script>
+    </body>
+</html>
