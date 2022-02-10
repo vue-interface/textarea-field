@@ -1,2 +1,5 @@
-import TextareaField from './src/TextareaField';
-export default TextareaField;
+import TextareaField from './src/TextareaField.vue';
+
+export {
+    TextareaField
+};

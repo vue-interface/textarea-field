@@ -1,11 +1,15 @@
-const plugin = require('tailwindcss/plugin');
-
 module.exports = {
-    purge: false,
-    corePlugins: {
-        container: false,
+    content: [
+        "./index.html"
+    ],
+    theme: {
+        extend: {},
     },
     plugins: [
-        require('@vue-interface/form-control/tailwindcss'),
+        ...require('@vue-interface/form-control/tailwindcss'),
+        require('@vue-interface/form-control/tailwindcss/custom-fields')
+    ],
+    safelist: [
+        ...require('@vue-interface/form-control/tailwindcss/safelist')()
     ]
 };
