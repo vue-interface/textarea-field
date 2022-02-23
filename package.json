@@ -41,7 +41,7 @@
   "dependencies": {
     "@vue-interface/activity-indicator": "^1.0.3",
     "@vue-interface/autogrow": "^0.9.0",
-    "@vue-interface/form-control": "^0.11.5",
+    "@vue-interface/form-control": "^0.12.0",
     "vue": "^2.6.14"
   },
   "devDependencies": {

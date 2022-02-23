@@ -15,7 +15,6 @@
             <textarea-field label="Descriptive Textarea Field" placeholder="Type something here..." help-text="Some helpful text goes here." class="mb-3"></textarea-field>
             <textarea-field label="Plain Textarea" placeholder="Type something here..." class="mb-3" plaintext></textarea-field>
             <textarea-field label="Readonly" placeholder="Type something here..." class="mb-3" readonly></textarea-field>
-            <textarea-field></textarea-field>
 
             <h2 class="text-2xl mt-6 mb-3">Sizes</h2>
 
@@ -65,6 +64,11 @@
             import Vue from 'vue/dist/vue';
             import { TextareaField } from './index.js';
             import { register, registry, Dots, Pulse, Spinner } from '@vue-interface/activity-indicator';
+            import { config } from '@vue-interface/form-control';
+
+            config({
+                animated: true
+            });
             
             register({
                 Dots,
