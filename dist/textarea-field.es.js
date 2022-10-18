@@ -1,477 +1,40 @@
-const STYLE_ATTRIBUTES = ["font", "fontFamily", "fontKerning", "fontSize", "fontStretch", "fontStyle", "fontVariant", "fontVariantLigatures", "fontVariantCaps", "fontVariantNumeric", "fontVariantEastAsian", "fontWeight", "lineHeight", "letterSpacing", "padding", "margin", "textAlign", "textAlignLast", "textDecoration", "textDecorationLine", "textDecorationStyle", "textDecorationColor", "textDecorationSkipInk", "textDecorationPosition", "textIndent", "textRendering", "textShadow", "textSizeAdjust", "textOverflow", "textTransform", "width", "wordBreak", "wordSpacing", "wordWrap"];
-function escape(html) {
-  const el = document.createElement("textarea");
-  el.textContent = html;
-  return el.innerHTML;
+import { openBlock as a, createElementBlock as d, normalizeClass as $, normalizeStyle as D, createElementVNode as E, createBlock as I, resolveDynamicComponent as M, createCommentVNode as p, toDisplayString as O, resolveComponent as V, resolveDirective as x, renderSlot as g, withDirectives as W, mergeProps as Z, createVNode as G, Transition as q, withCtx as U } from "vue";
+const X = ["font", "fontFamily", "fontKerning", "fontSize", "fontStretch", "fontStyle", "fontVariant", "fontVariantLigatures", "fontVariantCaps", "fontVariantNumeric", "fontVariantEastAsian", "fontWeight", "lineHeight", "letterSpacing", "padding", "margin", "textAlign", "textAlignLast", "textDecoration", "textDecorationLine", "textDecorationStyle", "textDecorationColor", "textDecorationSkipInk", "textDecorationPosition", "textIndent", "textRendering", "textShadow", "textSizeAdjust", "textOverflow", "textTransform", "width", "wordBreak", "wordSpacing", "wordWrap"];
+function K(e) {
+  const t = document.createElement("textarea");
+  return t.textContent = e, t.innerHTML;
 }
-function int(str) {
-  if (typeof str === "number") {
-    return str;
-  } else if (!str || !str.replace) {
-    return 0;
-  }
-  return parseInt(str.replace(/[^\d.]+/g, "")) || 0;
+function B(e) {
+  return typeof e == "number" ? e : !e || !e.replace ? 0 : parseInt(e.replace(/[^\d.]+/g, "")) || 0;
 }
-function input(div, el, minHeight, maxHeight) {
-  div.innerHTML = escape(el.value).replace(/(?:\r\n|\r|\n)/g, "<br />") + "&nbsp;";
-  let dynamicHeight = Math.max(minHeight, height(div));
-  if (div.innerHTML.match(/(<br\s?\/?\>)+/)) {
-    dynamicHeight += int(style(el, "lineHeight"));
-  }
-  el.style.height = (!maxHeight || dynamicHeight < maxHeight ? dynamicHeight : maxHeight) + "px";
+function A(e, t, i, n) {
+  e.innerHTML = K(t.value).replace(/(?:\r\n|\r|\n)/g, "<br />") + "&nbsp;";
+  let r = Math.max(i, j(e));
+  e.innerHTML.match(/(<br\s?\/?\>)+/) && (r += B(N(t, "lineHeight"))), t.style.height = (!n || r < n ? r : n) + "px";
 }
-function height(el) {
-  return int(style(el, "height"));
+function j(e) {
+  return B(N(e, "height"));
 }
-function style(el, attr) {
-  return window.getComputedStyle(el)[attr];
+function N(e, t) {
+  return window.getComputedStyle(e)[t];
 }
-function mimic(el, minHeight) {
-  const div = document.createElement("div");
-  const styles = window.getComputedStyle(el);
-  div.style.position = "absolute";
-  div.style.zIndex = -1;
-  div.style.visibility = "hidden";
-  el.parentNode.insertBefore(div, el.nextSibling);
-  STYLE_ATTRIBUTES.forEach((key) => div.style[key] = styles[key]);
-  return div;
+function Y(e, t) {
+  const i = document.createElement("div"), n = window.getComputedStyle(e);
+  return i.style.position = "absolute", i.style.zIndex = -1, i.style.visibility = "hidden", e.parentNode.insertBefore(i, e.nextSibling), X.forEach((r) => i.style[r] = n[r]), i;
 }
-function init(el, binding, vnode) {
-  const minHeight = height(el);
-  const div = mimic(el);
-  const maxHeight = binding.value !== true ? binding.value : 0;
-  el.addEventListener("input", (event) => {
-    input(div, event.target, minHeight, maxHeight);
-  });
-  input(div, el, minHeight, maxHeight);
+function J(e, t, i) {
+  const n = j(e), r = Y(e), s = t.value !== !0 ? t.value : 0;
+  e.addEventListener("input", (o) => {
+    A(r, o.target, n, s);
+  }), A(r, e, n, s);
 }
-var Autogrow = {
-  inserted(el, binding, vnode) {
-    init(el, binding);
-    el.resize = function() {
-      vnode.context.$nextTick(() => {
-        el.dispatchEvent(new Event("input"));
+const Q = {
+  mounted(e, t, i) {
+    t.value !== !1 && (J(e, t), e.resize = function() {
+      i.context.$nextTick(() => {
+        e.dispatchEvent(new Event("input"));
       });
-    };
-  }
-};
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-  return _typeof = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(obj2) {
-    return typeof obj2;
-  } : function(obj2) {
-    return obj2 && typeof Symbol == "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-  }, _typeof(obj);
-}
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor)
-      descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps)
-    _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps)
-    _defineProperties(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", {
-    writable: false
-  });
-  return Constructor;
-}
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o2, p2) {
-    o2.__proto__ = p2;
-    return o2;
-  };
-  return _setPrototypeOf(o, p);
-}
-function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct)
-    return false;
-  if (Reflect.construct.sham)
-    return false;
-  if (typeof Proxy === "function")
-    return true;
-  try {
-    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-    }));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-function _construct(Parent, args, Class) {
-  if (_isNativeReflectConstruct()) {
-    _construct = Reflect.construct;
-  } else {
-    _construct = function _construct2(Parent2, args2, Class2) {
-      var a = [null];
-      a.push.apply(a, args2);
-      var Constructor = Function.bind.apply(Parent2, a);
-      var instance = new Constructor();
-      if (Class2)
-        _setPrototypeOf(instance, Class2.prototype);
-      return instance;
-    };
-  }
-  return _construct.apply(null, arguments);
-}
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr))
-    return arr;
-}
-function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-  if (_i == null)
-    return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _s, _e;
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-      if (i && _arr.length === i)
-        break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null)
-        _i["return"]();
-    } finally {
-      if (_d)
-        throw _e;
-    }
-  }
-  return _arr;
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o)
-    return;
-  if (typeof o === "string")
-    return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor)
-    n = o.constructor.name;
-  if (n === "Map" || n === "Set")
-    return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length)
-    len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++)
-    arr2[i] = arr[i];
-  return arr2;
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-var _assign = function __assign() {
-  _assign = Object.assign || function __assign22(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p))
-          t[p] = s[p];
-      }
-    }
-    return t;
-  };
-  return _assign.apply(this, arguments);
-};
-function lowerCase$1(str) {
-  return str.toLowerCase();
-}
-var DEFAULT_SPLIT_REGEXP$1 = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
-var DEFAULT_STRIP_REGEXP$1 = /[^A-Z0-9]+/gi;
-function noCase$1(input2, options) {
-  if (options === void 0) {
-    options = {};
-  }
-  var _a = options.splitRegexp, splitRegexp = _a === void 0 ? DEFAULT_SPLIT_REGEXP$1 : _a, _b = options.stripRegexp, stripRegexp = _b === void 0 ? DEFAULT_STRIP_REGEXP$1 : _b, _c = options.transform, transform = _c === void 0 ? lowerCase$1 : _c, _d = options.delimiter, delimiter = _d === void 0 ? " " : _d;
-  var result = replace$1(replace$1(input2, splitRegexp, "$1\0$2"), stripRegexp, "\0");
-  var start = 0;
-  var end = result.length;
-  while (result.charAt(start) === "\0") {
-    start++;
-  }
-  while (result.charAt(end - 1) === "\0") {
-    end--;
-  }
-  return result.slice(start, end).split("\0").map(transform).join(delimiter);
-}
-function replace$1(input2, re, value) {
-  if (re instanceof RegExp)
-    return input2.replace(re, value);
-  return re.reduce(function(input22, re2) {
-    return input22.replace(re2, value);
-  }, input2);
-}
-function dotCase$1(input2, options) {
-  if (options === void 0) {
-    options = {};
-  }
-  return noCase$1(input2, _assign({
-    delimiter: "."
-  }, options));
-}
-function paramCase$1(input2, options) {
-  if (options === void 0) {
-    options = {};
-  }
-  return dotCase$1(input2, _assign({
-    delimiter: "-"
-  }, options));
-}
-var ComponentRegistry = /* @__PURE__ */ function() {
-  function ComponentRegistry2() {
-    var _this = this;
-    var components = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
-    _classCallCheck(this, ComponentRegistry2);
-    this.components = {};
-    Object.entries(components).forEach(function(_ref) {
-      var _ref2 = _slicedToArray(_ref, 2), key = _ref2[0], value = _ref2[1];
-      _this.register(key, value);
     });
-  }
-  _createClass(ComponentRegistry2, [{
-    key: "validate",
-    value: function validate(value) {
-      if (_typeof(value) === "object" || typeof value === "function") {
-        return value;
-      }
-      throw new Error("Invalid data type `".concat(_typeof(value), "`. Should be type `object` or `function`."));
-    }
-  }, {
-    key: "get",
-    value: function get(name) {
-      var match = this.components[name = paramCase$1(name)];
-      if (match) {
-        return match;
-      }
-      throw new Error('"'.concat(name, '" has not been registered yet!'));
-    }
-  }, {
-    key: "register",
-    value: function register(name, value) {
-      var _this2 = this;
-      if (_typeof(name) === "object") {
-        Object.entries(name).forEach(function(_ref3) {
-          var _ref4 = _slicedToArray(_ref3, 2), name2 = _ref4[0], module = _ref4[1];
-          _this2.register(paramCase$1(name2), module);
-        });
-        return this;
-      }
-      this.components[paramCase$1(name)] = this.validate(value);
-      return this;
-    }
-  }, {
-    key: "remove",
-    value: function remove(name) {
-      delete this.components[paramCase$1(name)];
-      return this;
-    }
-  }, {
-    key: "reset",
-    value: function reset() {
-      this.components = {};
-      return this;
-    }
-  }]);
-  return ComponentRegistry2;
-}();
-function factory() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-  return _construct(ComponentRegistry, args);
-}
-const registry = factory();
-var render$1 = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "activity-indicator", class: _vm.classes, style: _vm.style }, [_c("div", { staticClass: "activity-indicator-content" }, [_c(_vm.component, { tag: "component", staticClass: "mx-auto" }), _vm.label ? _c("div", { staticClass: "activity-indicator-label" }, [_vm._v(" " + _vm._s(_vm.label) + " ")]) : _vm._e()], 1)]);
-};
-var staticRenderFns$1 = [];
-var ActivityIndicator_vue_vue_type_style_index_0_lang = "";
-function normalizeComponent(scriptExports, render2, staticRenderFns2, functionalTemplate, injectStyles, scopeId, moduleIdentifier, shadowMode) {
-  var options = typeof scriptExports === "function" ? scriptExports.options : scriptExports;
-  if (render2) {
-    options.render = render2;
-    options.staticRenderFns = staticRenderFns2;
-    options._compiled = true;
-  }
-  if (functionalTemplate) {
-    options.functional = true;
-  }
-  if (scopeId) {
-    options._scopeId = "data-v-" + scopeId;
-  }
-  var hook;
-  if (moduleIdentifier) {
-    hook = function(context) {
-      context = context || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext;
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== "undefined") {
-        context = __VUE_SSR_CONTEXT__;
-      }
-      if (injectStyles) {
-        injectStyles.call(this, context);
-      }
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier);
-      }
-    };
-    options._ssrRegister = hook;
-  } else if (injectStyles) {
-    hook = shadowMode ? function() {
-      injectStyles.call(this, (options.functional ? this.parent : this).$root.$options.shadowRoot);
-    } : injectStyles;
-  }
-  if (hook) {
-    if (options.functional) {
-      options._injectStyles = hook;
-      var originalRender = options.render;
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context);
-        return originalRender(h, context);
-      };
-    } else {
-      var existing = options.beforeCreate;
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-    }
-  }
-  return {
-    exports: scriptExports,
-    options
-  };
-}
-function unit(value, uom = "px") {
-  return value !== null && value !== void 0 && value !== false && isFinite(value) ? `${value}${uom}` : value;
-}
-const __vue2_script$1 = {
-  name: "ActivityIndicator",
-  props: {
-    absolute: Boolean,
-    center: Boolean,
-    label: String,
-    size: {
-      type: String,
-      default: "md"
-    },
-    registry: {
-      type: ComponentRegistry,
-      default() {
-        return registry;
-      }
-    },
-    type: {
-      type: String,
-      required: true
-    },
-    height: [String, Number],
-    maxHeight: [String, Number],
-    minHeight: [String, Number],
-    width: [String, Number],
-    maxWidth: [String, Number],
-    minWidth: [String, Number]
-  },
-  computed: {
-    classes() {
-      return {
-        "activity-indicator-center": this.center,
-        "activity-indicator-absolute": this.absolute,
-        [this.size && `activity-indicator-${this.size}`]: !!this.size
-      };
-    },
-    style() {
-      return {
-        width: unit(this.width),
-        maxWidth: unit(this.maxWidth),
-        minWidth: unit(this.minWidth),
-        height: unit(this.height),
-        maxHeight: unit(this.maxHeight),
-        minHeight: unit(this.minHeight)
-      };
-    },
-    component() {
-      return () => {
-        const component = registry.get(this.type);
-        if (component instanceof Promise) {
-          return component;
-        }
-        if (typeof component === "function") {
-          return component();
-        }
-        return Promise.resolve(component);
-      };
-    }
-  }
-};
-const __cssModules$1 = {};
-var __component__$1 = /* @__PURE__ */ normalizeComponent(__vue2_script$1, render$1, staticRenderFns$1, false, __vue2_injectStyles$1, null, null, null);
-function __vue2_injectStyles$1(context) {
-  for (let o in __cssModules$1) {
-    this[o] = __cssModules$1[o];
-  }
-}
-var ActivityIndicator = /* @__PURE__ */ function() {
-  return __component__$1.exports;
-}();
-var Chase_vue_vue_type_style_index_0_lang = "";
-var CircleFade_vue_vue_type_style_index_0_lang = "";
-var CircleOrbit_vue_vue_type_style_index_0_lang = "";
-var CircleTrail_vue_vue_type_style_index_0_lang = "";
-var Dots_vue_vue_type_style_index_0_lang = "";
-var DoublePulse_vue_vue_type_style_index_0_lang = "";
-var Facebook_vue_vue_type_style_index_0_lang = "";
-var Grid_vue_vue_type_style_index_0_lang = "";
-var Pulse_vue_vue_type_style_index_0_lang = "";
-var Spinner_vue_vue_type_style_index_0_lang = "";
-var Spotify_vue_vue_type_style_index_0_lang = "";
-var Square_vue_vue_type_style_index_0_lang = "";
-var SquareFold_vue_vue_type_style_index_0_lang = "";
-var SquareOrbit_vue_vue_type_style_index_0_lang = "";
-var Shadowable = {
-  props: {
-    dropShadow: [Boolean, String],
-    dropShadowableClassPrefix: {
-      type: String,
-      default: "drop-shadow"
-    },
-    shadow: [Boolean, String],
-    shadowableClassPrefix: {
-      type: String,
-      default: "shadow"
-    }
-  },
-  computed: {
-    shadowableClass() {
-      const dropShadowClassName = this.dropShadow === true ? "" : this.dropShadow && `-${this.dropShadow}`;
-      const shadowClassName = this.shadow === true ? "" : this.shadow && `-${this.shadow}`;
-      return {
-        [`${this.dropShadowableClassPrefix}${dropShadowClassName}`]: !!this.dropShadow,
-        [`${this.shadowableClassPrefix}${shadowClassName}`]: !!this.shadow
-      };
-    }
   }
 };
 /*! *****************************************************************************
@@ -488,143 +51,264 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-var __assign2 = function() {
-  __assign2 = Object.assign || function __assign3(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-      for (var p in s)
-        if (Object.prototype.hasOwnProperty.call(s, p))
-          t[p] = s[p];
+var S = function() {
+  return S = Object.assign || function(t) {
+    for (var i, n = 1, r = arguments.length; n < r; n++) {
+      i = arguments[n];
+      for (var s in i)
+        Object.prototype.hasOwnProperty.call(i, s) && (t[s] = i[s]);
     }
     return t;
-  };
-  return __assign2.apply(this, arguments);
+  }, S.apply(this, arguments);
 };
-function lowerCase(str) {
-  return str.toLowerCase();
+function ee(e) {
+  return e.toLowerCase();
 }
-var DEFAULT_SPLIT_REGEXP = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
-var DEFAULT_STRIP_REGEXP = /[^A-Z0-9]+/gi;
-function noCase(input2, options) {
-  if (options === void 0) {
-    options = {};
-  }
-  var _a = options.splitRegexp, splitRegexp = _a === void 0 ? DEFAULT_SPLIT_REGEXP : _a, _b = options.stripRegexp, stripRegexp = _b === void 0 ? DEFAULT_STRIP_REGEXP : _b, _c = options.transform, transform = _c === void 0 ? lowerCase : _c, _d = options.delimiter, delimiter = _d === void 0 ? " " : _d;
-  var result = replace(replace(input2, splitRegexp, "$1\0$2"), stripRegexp, "\0");
-  var start = 0;
-  var end = result.length;
-  while (result.charAt(start) === "\0")
-    start++;
-  while (result.charAt(end - 1) === "\0")
-    end--;
-  return result.slice(start, end).split("\0").map(transform).join(delimiter);
+var te = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], ie = /[^A-Z0-9]+/gi;
+function ne(e, t) {
+  t === void 0 && (t = {});
+  for (var i = t.splitRegexp, n = i === void 0 ? te : i, r = t.stripRegexp, s = r === void 0 ? ie : r, o = t.transform, m = o === void 0 ? ee : o, c = t.delimiter, l = c === void 0 ? " " : c, u = F(F(e, n, "$1\0$2"), s, "\0"), h = 0, f = u.length; u.charAt(h) === "\0"; )
+    h++;
+  for (; u.charAt(f - 1) === "\0"; )
+    f--;
+  return u.slice(h, f).split("\0").map(m).join(l);
 }
-function replace(input2, re, value) {
-  if (re instanceof RegExp)
-    return input2.replace(re, value);
-  return re.reduce(function(input3, re2) {
-    return input3.replace(re2, value);
-  }, input2);
+function F(e, t, i) {
+  return t instanceof RegExp ? e.replace(t, i) : t.reduce(function(n, r) {
+    return n.replace(r, i);
+  }, e);
 }
-function dotCase(input2, options) {
-  if (options === void 0) {
-    options = {};
-  }
-  return noCase(input2, __assign2({
+function re(e, t) {
+  return t === void 0 && (t = {}), ne(e, S({
     delimiter: "."
-  }, options));
+  }, t));
 }
-function paramCase(input2, options) {
-  if (options === void 0) {
-    options = {};
-  }
-  return dotCase(input2, __assign2({
+function b(e, t) {
+  return t === void 0 && (t = {}), re(e, S({
     delimiter: "-"
-  }, options));
+  }, t));
 }
-const global = {};
-function config(...args) {
-  if (!args.length) {
-    return global;
+class R {
+  constructor(t = {}) {
+    this.components = /* @__PURE__ */ new Map(), Object.entries(t).forEach(([i, n]) => {
+      this.register(i, n);
+    });
   }
-  const [key, value] = args;
-  if (typeof key === "string") {
-    return typeof global[key] !== "undefined" ? global[key] : value;
+  get(t) {
+    const i = this.components.get(t = b(t));
+    if (i)
+      return i;
+    throw new Error(`"${t}" has not been registered yet!`);
   }
-  if (Array.isArray(key)) {
-    return key.reduce((carry, key2) => {
-      return Object.assign(carry, {
-        [key2]: global[key2]
-      });
-    }, {});
+  register(t, i) {
+    return typeof t == "object" ? (Object.entries(t).forEach(([n, r]) => {
+      this.register(b(n), r);
+    }), this) : (this.components.set(b(t), i), this);
   }
-  return Object.assign(global, ...args);
+  remove(t) {
+    return this.components.delete(b(t)), this;
+  }
+  reset() {
+    return this.components = /* @__PURE__ */ new Map(), this;
+  }
 }
-function prefix(key, value, delimeter = "-") {
-  const string = value.toString().replace(new RegExp(`^${key}${delimeter}?`), "");
-  return [paramCase(string), key].filter((value2) => !!value2).join(delimeter);
+function se(...e) {
+  return new R(...e);
 }
-function isObject(subject) {
-  return !Array.isArray(subject) && typeof subject === "object";
+const k = se();
+const H = (e, t) => {
+  const i = e.__vccOpts || e;
+  for (const [n, r] of t)
+    i[n] = r;
+  return i;
+};
+function v(e, t = "px") {
+  return e != null && e !== !1 && isFinite(e) ? `${e}${t}` : e;
 }
-var FormControl = {
+const ae = {
+  name: "ActivityIndicator",
+  props: {
+    absolute: Boolean,
+    center: Boolean,
+    label: String,
+    size: {
+      type: String,
+      default: "md"
+    },
+    registry: {
+      type: R,
+      default() {
+        return k;
+      }
+    },
+    type: {
+      type: String,
+      required: !0
+    },
+    height: [String, Number],
+    maxHeight: [String, Number],
+    minHeight: [String, Number],
+    width: [String, Number],
+    maxWidth: [String, Number],
+    minWidth: [String, Number]
+  },
+  data: () => ({
+    is: null
+  }),
+  computed: {
+    classes() {
+      return {
+        "activity-indicator-center": this.center,
+        "activity-indicator-absolute": this.absolute,
+        [this.size && `activity-indicator-${this.size}`]: !!this.size
+      };
+    },
+    style() {
+      return {
+        width: v(this.width),
+        maxWidth: v(this.maxWidth),
+        minWidth: v(this.minWidth),
+        height: v(this.height),
+        maxHeight: v(this.maxHeight),
+        minHeight: v(this.minHeight)
+      };
+    }
+  },
+  async mounted() {
+    const e = await this.component();
+    this.is = () => e;
+  },
+  methods: {
+    async component() {
+      let e = k.get(this.type);
+      return e instanceof Promise ? e : (typeof e == "function" && (e = await e()), e.default ? e.default : e);
+    }
+  }
+}, oe = { class: "activity-indicator-content" }, le = {
+  key: 1,
+  class: "activity-indicator-label"
+};
+function ue(e, t, i, n, r, s) {
+  return a(), d("div", {
+    class: $(["activity-indicator", s.classes]),
+    style: D(s.style)
+  }, [
+    E("div", oe, [
+      e.is ? (a(), I(M(e.is()), {
+        key: 0,
+        class: "mx-auto"
+      })) : p("", !0),
+      i.label ? (a(), d("div", le, O(i.label), 1)) : p("", !0)
+    ])
+  ], 6);
+}
+const de = /* @__PURE__ */ H(ae, [["render", ue]]);
+const y = {};
+function _(...e) {
+  if (!e.length)
+    return y;
+  const [t, i] = e;
+  return typeof t == "string" ? typeof y[t] < "u" ? y[t] : i : Array.isArray(t) ? t.reduce((n, r) => Object.assign(n, {
+    [r]: y[r]
+  }), {}) : Object.assign(y, ...e);
+}
+var ce = {
+  props: {
+    dropShadow: [Boolean, String],
+    dropShadowableClassPrefix: {
+      type: String,
+      default: "drop-shadow"
+    },
+    shadow: [Boolean, String],
+    shadowableClassPrefix: {
+      type: String,
+      default: "shadow"
+    }
+  },
+  computed: {
+    shadowableClass() {
+      const e = this.dropShadow === !0 ? "" : this.dropShadow && `-${this.dropShadow}`, t = this.shadow === !0 ? "" : this.shadow && `-${this.shadow}`;
+      return {
+        [`${this.dropShadowableClassPrefix}${e}`]: !!this.dropShadow,
+        [`${this.shadowableClassPrefix}${t}`]: !!this.shadow
+      };
+    }
+  }
+}, C = function() {
+  return C = Object.assign || function(t) {
+    for (var i, n = 1, r = arguments.length; n < r; n++) {
+      i = arguments[n];
+      for (var s in i)
+        Object.prototype.hasOwnProperty.call(i, s) && (t[s] = i[s]);
+    }
+    return t;
+  }, C.apply(this, arguments);
+};
+function he(e) {
+  return e.toLowerCase();
+}
+var fe = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g], pe = /[^A-Z0-9]+/gi;
+function ge(e, t) {
+  t === void 0 && (t = {});
+  for (var i = t.splitRegexp, n = i === void 0 ? fe : i, r = t.stripRegexp, s = r === void 0 ? pe : r, o = t.transform, m = o === void 0 ? he : o, c = t.delimiter, l = c === void 0 ? " " : c, u = T(T(e, n, "$1\0$2"), s, "\0"), h = 0, f = u.length; u.charAt(h) === "\0"; )
+    h++;
+  for (; u.charAt(f - 1) === "\0"; )
+    f--;
+  return u.slice(h, f).split("\0").map(m).join(l);
+}
+function T(e, t, i) {
+  return t instanceof RegExp ? e.replace(t, i) : t.reduce(function(n, r) {
+    return n.replace(r, i);
+  }, e);
+}
+function ve(e, t) {
+  return t === void 0 && (t = {}), ge(e, C({
+    delimiter: "."
+  }, t));
+}
+function P(e, t) {
+  return t === void 0 && (t = {}), ve(e, C({
+    delimiter: "-"
+  }, t));
+}
+function w(e, t, i = "-") {
+  const n = t.toString().replace(new RegExp(`^${e}${i}?`), "");
+  return [P(n), e].filter((r) => !!r).join(i);
+}
+function z(e) {
+  return !Array.isArray(e) && typeof e == "object";
+}
+function L(e) {
+  return e === void 0;
+}
+const me = {
   directives: {
     bindEvents: {
-      bind(el, binding, vnode) {
-        el.addEventListener("focus", () => {
-          vnode.context.hasFocus = true;
-        });
-        el.addEventListener("blur", () => {
-          vnode.context.hasFocus = false;
-        });
-        el.addEventListener(el.tagName === "SELECT" ? "change" : "input", (e) => {
-          vnode.context.isEmpty = !el.value;
-          vnode.context.currentValue = el.value;
-        });
-        vnode.context.hasChanged = !!el.value;
-        vnode.context.bindEvents.forEach((name) => {
-          el.addEventListener(name, (event) => {
-            vnode.context.$emit(name, event);
-          });
-        });
-        if (el.tagName === "SELECT") {
-          const opt = el.querySelector('[value=""]');
-          if (opt && opt.value === el.value) {
-            vnode.context.defaultEmpty = true;
-          }
-        }
+      beforeMount(e, t, i) {
+        t.instance.bindEvents(e);
       }
     }
   },
-  mixins: [Shadowable],
-  inheritAttrs: false,
+  mixins: [ce],
+  inheritAttrs: !1,
   props: {
     activity: {
       type: Boolean,
-      default: false
+      default: !1
     },
     animated: {
       type: Boolean,
-      default: () => config("animated", false)
+      default: () => _("animated", !1)
     },
-    bindEvents: {
+    nativeEvents: {
       type: Array,
       default() {
         return ["focus", "blur", "change", "click", "keypress", "keyup", "keydown", "progress", "paste"];
       }
     },
-    componentName: {
-      type: String,
-      default() {
-        return this.$options.name;
-      }
-    },
     defaultControlClass: {
       type: String,
-      default: () => config("defaultControlClass", "form-control")
-    },
-    defaultValue: {
-      default: () => config("defaultValue", null)
+      default: () => _("defaultControlClass", "form-control")
     },
     error: [String, Array, Boolean],
     errors: {
@@ -636,13 +320,13 @@ var FormControl = {
     feedback: [String, Array],
     group: {
       type: Boolean,
-      default: () => config("group", true)
+      default: () => _("group", !0)
     },
     helpText: [Number, String],
     hideLabel: Boolean,
     indicator: {
       type: String,
-      default: () => config("indicator", "spinner")
+      default: () => _("indicator", "spinner")
     },
     indicatorSize: String,
     inline: Boolean,
@@ -650,61 +334,58 @@ var FormControl = {
     label: [Number, String],
     labelClass: {
       type: [Object, String],
-      default: () => config("labelClass", "form-label")
+      default: () => _("labelClass", "form-label")
+    },
+    modelValue: {
+      default: void 0
     },
     pill: Boolean,
     plaintext: Boolean,
     size: String,
     spacing: String,
-    valid: Boolean,
-    value: {
-      default: null
-    }
+    valid: Boolean
   },
   data() {
     return {
-      currentValue: this.value || this.defaultValue,
-      defaultEmpty: false,
-      hasChanged: false,
-      hasFocus: false,
-      isEmpty: !(this.value || this.defaultValue)
+      defaultEmpty: !1,
+      hasChanged: !1,
+      hasFocus: !1,
+      isEmpty: !0
     };
   },
   computed: {
     id() {
-      return this.$attrs.id || this.$attrs.name;
+      return this.$attrs.id || this.$attrs.name || (Math.random() + 1).toString(36).substring(7);
+    },
+    componentName() {
+      return this.$options.name;
     },
     controlAttributes() {
-      return Object.keys(this.$attrs).concat([["id", this.id], ["class", this.controlClasses]]).reduce((carry, key) => {
-        if (Array.isArray(key)) {
-          carry[key[0]] = key[1];
-        } else {
-          carry[key] = this[key] || this.$attrs[key];
-        }
-        return carry;
-      }, {});
+      return Object.fromEntries(Object.entries(this.$attrs).concat([["id", this.id], ["class", this.controlClasses]]));
     },
     controlClass() {
       return this.defaultControlClass;
     },
     controlSizeClass() {
-      return prefix(this.size, this.controlClass);
+      return w(this.size, this.controlClass);
     },
     formGroupClasses() {
       return {
-        [paramCase(this.componentName)]: !!this.componentName,
-        [this.size && prefix(this.size, this.componentName)]: !!this.size,
-        "animated": this.animated,
+        [P(this.componentName)]: !!this.componentName,
+        [this.size && w(this.size, this.componentName)]: !!this.size,
+        animated: this.animated,
         "default-empty": this.defaultEmpty,
         "form-group": this.group,
-        [this.size && prefix(this.size, "form-group")]: !!this.size,
+        [this.size && w(this.size, "form-group")]: !!this.size,
         "has-activity": this.activity,
         "has-changed": this.hasChanged,
         "has-focus": this.hasFocus,
         "has-icon": !!this.$slots.icon,
         "is-empty": this.isEmpty,
         "is-invalid": !!(this.invalid || this.invalidFeedback),
-        "is-valid": !!(this.valid || this.validFeedback)
+        "is-valid": !!(this.valid || this.validFeedback),
+        [this.$attrs.class]: !!this.$attrs.class,
+        [this.$attrs.id]: !!this.$attrs.id
       };
     },
     controlClasses() {
@@ -723,16 +404,12 @@ var FormControl = {
       return !!this.$slots.default;
     },
     invalidFeedback() {
-      if (this.error === "") {
+      if (this.error === "")
         return null;
-      }
-      if (this.error) {
+      if (this.error)
         return this.error;
-      }
-      const errors = this.getFieldErrors();
-      return Array.isArray(errors) ? errors.filter((error) => {
-        return error && typeof error === "string";
-      }).join("<br>") : errors;
+      const e = this.getFieldErrors();
+      return Array.isArray(e) ? e.filter((t) => t && typeof t == "string").join("<br>") : e;
     },
     pillClasses() {
       return "rounded rounded-pill";
@@ -746,96 +423,137 @@ var FormControl = {
   },
   watch: {
     hasFocus() {
-      if (this.shouldChangeOnFocus()) {
-        this.hasChanged = true;
-      }
-    },
-    value(value) {
-      this.currentValue = value;
-    },
-    currentValue() {
-      this.hasChanged = true;
+      this.shouldChangeOnFocus() && (this.hasChanged = !0);
     },
     defaultEmpty() {
-      this.hasChanged = true;
-    }
-  },
-  mounted() {
-    if (this.value === null && this.defaultValue !== null) {
-      this.$emit("input", this.defaultValue);
+      this.hasChanged = !0;
     }
   },
   methods: {
+    bindEvents(e, t) {
+      t || (t = this.onInput);
+      const i = e.querySelectorAll("option")[e.selectedIndex];
+      L(this.modelValue) ? L(i) || (e.value = i.value) : e.value = this.modelValue, e.value && t(e.value), this.hasChanged = !!e.value, this.isEmpty = !e.value, e.addEventListener("focus", () => {
+        this.hasFocus = !0;
+      }), e.addEventListener("blur", () => {
+        this.hasFocus = !1;
+      }), e.addEventListener("input", (n) => {
+        this.isEmpty = !1, this.hasChanged = !0;
+      }), e.addEventListener(e.tagName === "SELECT" ? "change" : "input", () => t(e.value)), this.nativeEvents.forEach((n) => {
+        e.addEventListener(n, (r) => {
+          this.$emit(n, r);
+        });
+      });
+    },
     blur() {
-      if (this.getInputField()) {
-        this.getInputField().blur();
-      }
+      this.getInputField() && this.getInputField().blur();
     },
     focus() {
-      if (this.getInputField()) {
-        this.getInputField().focus();
-      }
+      this.getInputField() && this.getInputField().focus();
     },
     getInputField() {
       return this.$el.querySelector(".form-control, input, select, textarea");
     },
     getFieldErrors() {
-      let errors = this.error || this.errors;
-      if (this.errors && isObject(this.errors)) {
-        errors = this.errors[this.$attrs.name || this.$attrs.id];
-      }
-      return !errors || Array.isArray(errors) || isObject(errors) ? errors : [errors];
+      let e = this.error || this.errors;
+      return this.errors && z(this.errors) && (e = this.errors[this.$attrs.name || this.$attrs.id]), !e || Array.isArray(e) || z(e) ? e : [e];
     },
     shouldChangeOnFocus() {
       return !this.getInputField().readOnly;
     },
     onInput(e) {
-      this.$emit("input", e.target.value);
-      this.$emit("update:value", e.target.value);
+      this.$emit("update:modelValue", e);
     }
   }
 };
-var render = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("div", { class: _vm.formGroupClasses }, [_vm._t("label", function() {
-    return [_vm.label || _vm.$attrs.placeholder ? _c("label", { ref: "label", class: _vm.labelClass, attrs: { "for": _vm.id }, domProps: { "innerHTML": _vm._s(_vm.label || _vm.$attrs.placeholder) }, on: { "click": _vm.focus } }) : _vm._e()];
-  }), _c("div", { staticClass: "form-group-inner" }, [_vm._t("control", function() {
-    return [_vm.$slots.icon ? _c("div", { staticClass: "form-group-inner-icon", on: { "click": _vm.focus } }, [_vm._t("icon")], 2) : _vm._e(), _c("textarea", _vm._b({ directives: [{ name: "autogrow", rawName: "v-autogrow", value: _vm.autogrow, expression: "autogrow" }, { name: "bind-events", rawName: "v-bind-events" }], ref: "field", domProps: { "value": _vm.currentValue }, on: { "input": _vm.onInput } }, "textarea", _vm.controlAttributes, false))];
-  }), _vm._t("activity", function() {
-    return [_c("transition", { attrs: { "name": "textarea-field-fade" } }, [_vm.activity ? _c("activity-indicator", { key: "activity", ref: "activity", attrs: { "type": _vm.indicator, "size": _vm.indicatorSize || _vm.size } }) : _vm._e()], 1)];
-  })], 2), _vm._t("feedback", function() {
-    return [_vm.invalidFeedback ? _c("div", { staticClass: "invalid-feedback", attrs: { "invalid": "" }, domProps: { "innerHTML": _vm._s(_vm.invalidFeedback) } }) : _vm.validFeedback ? _c("div", { staticClass: "valid-feedback", attrs: { "valid": "" }, domProps: { "innerHTML": _vm._s(_vm.validFeedback) } }) : _vm._e()];
-  }), _vm._t("help", function() {
-    return [_vm.helpText ? _c("small", { ref: "help" }, [_vm._v(" " + _vm._s(_vm.helpText) + " ")]) : _vm._e()];
-  })], 2);
-};
-var staticRenderFns = [];
-var TextareaField_vue_vue_type_style_index_0_lang = "";
-const __vue2_script = {
+const ye = {
   name: "TextareaField",
   directives: {
-    Autogrow
+    Autogrow: Q
   },
   components: {
-    ActivityIndicator
+    ActivityIndicator: de
   },
   mixins: [
-    FormControl
+    me
   ],
   props: {
     autogrow: [Number, String, Boolean]
+  },
+  data() {
+    return {
+      currentValue: this.value
+    };
   }
-};
-const __cssModules = {};
-var __component__ = /* @__PURE__ */ normalizeComponent(__vue2_script, render, staticRenderFns, false, __vue2_injectStyles, null, null, null);
-function __vue2_injectStyles(context) {
-  for (let o in __cssModules) {
-    this[o] = __cssModules[o];
-  }
+}, _e = ["for", "innerHTML"], be = { class: "form-group-inner" }, Se = ["value"], Ce = ["innerHTML"], we = ["innerHTML"];
+function $e(e, t, i, n, r, s) {
+  const o = V("activity-indicator"), m = x("autogrow"), c = x("bind-events");
+  return a(), d("div", {
+    class: $(e.formGroupClasses)
+  }, [
+    g(e.$slots, "label", {}, () => [
+      e.label || e.$attrs.placeholder ? (a(), d("label", {
+        key: 0,
+        ref: "label",
+        for: e.id,
+        class: $(e.labelClass),
+        onClick: t[0] || (t[0] = (...l) => e.focus && e.focus(...l)),
+        innerHTML: e.label || e.$attrs.placeholder
+      }, null, 10, _e)) : p("", !0)
+    ]),
+    E("div", be, [
+      g(e.$slots, "control", {}, () => [
+        e.$slots.icon ? (a(), d("div", {
+          key: 0,
+          class: "form-group-inner-icon",
+          onClick: t[1] || (t[1] = (...l) => e.focus && e.focus(...l))
+        }, [
+          g(e.$slots, "icon")
+        ])) : p("", !0),
+        W(E("textarea", Z({ ref: "field" }, e.controlAttributes, {
+          value: r.currentValue,
+          onInput: t[2] || (t[2] = (...l) => e.onInput && e.onInput(...l))
+        }), null, 16, Se), [
+          [m, i.autogrow],
+          [c]
+        ])
+      ]),
+      g(e.$slots, "activity", {}, () => [
+        G(q, { name: "textarea-field-fade" }, {
+          default: U(() => [
+            e.activity ? (a(), I(o, {
+              key: "activity",
+              ref: "activity",
+              type: e.indicator,
+              size: e.indicatorSize || e.size
+            }, null, 8, ["type", "size"])) : p("", !0)
+          ]),
+          _: 1
+        })
+      ])
+    ]),
+    g(e.$slots, "feedback", {}, () => [
+      e.invalidFeedback ? (a(), d("div", {
+        key: 0,
+        class: "invalid-feedback",
+        invalid: "",
+        innerHTML: e.invalidFeedback
+      }, null, 8, Ce)) : e.validFeedback ? (a(), d("div", {
+        key: 1,
+        class: "valid-feedback",
+        valid: "",
+        innerHTML: e.validFeedback
+      }, null, 8, we)) : p("", !0)
+    ]),
+    g(e.$slots, "help", {}, () => [
+      e.helpText ? (a(), d("small", {
+        key: 0,
+        ref: "help"
+      }, O(e.helpText), 513)) : p("", !0)
+    ])
+  ], 2);
 }
-var TextareaField = /* @__PURE__ */ function() {
-  return __component__.exports;
-}();
-export { TextareaField };
+const xe = /* @__PURE__ */ H(ye, [["render", $e]]);
+export {
+  xe as TextareaField
+};

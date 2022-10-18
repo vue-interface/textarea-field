@@ -48,9 +48,15 @@
             <textarea-field size="md" label="Medium" indicator="pulse" :activity="showActivity" class="mb-3"></textarea-field>
             <textarea-field size="lg" label="Large" :activity="showActivity" class="mb-3"></textarea-field>
 
-            <button type="button" @click="showActivity = !showActivity">
+            <button class="bg-neutral-400 p-2 rounded text-white" type="button" @click="showActivity = !showActivity">
                 <span v-if="!showActivity">Show</span><span v-else>Hide</span> Activity
             </button>
+
+            <h2 class="text-2xl mt-6 mb-3">Autogrow</h2>
+
+            <textarea-field autogrow size="sm" label="Small" class="mb-3"></textarea-field>
+            <textarea-field autogrow size="md" label="Medium" class="mb-3"></textarea-field>
+            <textarea-field  autogrow size="lg" label="Large" class="mb-3"></textarea-field>
 
             <h2 class="text-2xl mt-6 mb-3">Validation</h2>
 
@@ -61,7 +67,7 @@
 
         <script type="module">
             import './index.css';
-            import Vue from 'vue/dist/vue';
+            import { createApp } from 'vue/dist/vue.esm-bundler';
             import { TextareaField } from './index.js';
             import { register, registry, Dots, Pulse, Spinner } from '@vue-interface/activity-indicator';
             import { config } from '@vue-interface/form-control';
@@ -75,12 +81,8 @@
                 Pulse,
                 Spinner
             });
-            
-            Vue.config.devtools = false;
-            Vue.config.productionTip = false;
               
-            const vue = new Vue({
-                el: '#app',
+            const vue = createApp({
                 components: {
                     TextareaField
                 },
@@ -90,7 +92,8 @@
                         value: null
                     };
                 }
-            });
+            })
+            .mount('#app');
         </script>
     </body>
 </html>

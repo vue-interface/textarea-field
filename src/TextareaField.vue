@@ -1,3 +1,44 @@
+<script>
+import { Autogrow } from '@vue-interface/autogrow';
+import { ActivityIndicator } from '@vue-interface/activity-indicator';
+import { FormControl } from '@vue-interface/form-control';
+
+export default {
+
+    name: 'TextareaField',
+
+    directives: {
+        Autogrow
+    },
+
+    components: {
+        ActivityIndicator
+    },
+
+    mixins: [
+        FormControl
+    ],
+
+    props: {
+        
+        /**
+         * The autogrow attribute
+         *
+         * @property Boolean
+         */
+        autogrow: [Number, String, Boolean]
+
+    },
+
+    data() {
+        return {
+            currentValue: this.value,
+        };
+    }
+
+};
+</script>
+
 <template>
     <div :class="formGroupClasses">
         <slot name="label">
@@ -12,7 +53,10 @@
 
         <div class="form-group-inner">
             <slot name="control">
-                <div v-if="$slots.icon" class="form-group-inner-icon" @click="focus">
+                <div
+                    v-if="$slots.icon"
+                    class="form-group-inner-icon"
+                    @click="focus">
                     <slot name="icon" />
                 </div>
                 <textarea
@@ -50,49 +94,14 @@
         </slot>
 
         <slot name="help">
-            <small v-if="helpText" ref="help">
+            <small
+                v-if="helpText"
+                ref="help">
                 {{ helpText }}
             </small>
         </slot>
     </div>
 </template>
-
-<script>
-import Autogrow from '@vue-interface/autogrow';
-import { ActivityIndicator } from '@vue-interface/activity-indicator';
-import { FormControl } from '@vue-interface/form-control';
-
-export default {
-
-    name: 'TextareaField',
-
-    directives: {
-        Autogrow
-    },
-
-    components: {
-        ActivityIndicator
-    },
-
-    mixins: [
-        FormControl
-    ],
-
-    props: {
-        
-        /**
-         * The autogrow attribute
-         *
-         * @property Boolean
-         */
-        autogrow: [Number, String, Boolean]
-
-    }
-
-};
-</script>
-
-
 
 <style>
 .textarea-field,
