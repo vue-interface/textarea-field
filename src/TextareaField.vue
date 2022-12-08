@@ -2,8 +2,9 @@
 import { Autogrow } from '@vue-interface/autogrow';
 import { ActivityIndicator } from '@vue-interface/activity-indicator';
 import { FormControl } from '@vue-interface/form-control';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
 
     name: 'TextareaField',
 
@@ -36,7 +37,7 @@ export default {
         };
     }
 
-};
+});
 </script>
 
 <template>
@@ -52,20 +53,15 @@ export default {
         </slot>
 
         <div class="form-group-inner">
-            <slot name="control">
-                <div
-                    v-if="$slots.icon"
-                    class="form-group-inner-icon"
-                    @click="focus">
+            <slot name="control" :bind-events="bindEvents" :control-attributes="controlAttributes" :focus="focus">
+                <div v-if="$slots.icon" class="form-group-inner-icon" @click="focus">
                     <slot name="icon" />
                 </div>
                 <textarea
                     ref="field"
                     v-autogrow="autogrow"
                     v-bind-events
-                    v-bind="controlAttributes"
-                    :value="currentValue"
-                    @input="onInput" />
+                    v-bind="controlAttributes" />
             </slot>
 
             <slot name="activity">
@@ -181,34 +177,21 @@ export default {
 
 .textarea-field .form-group-inner-icon {
     position: absolute;
-    top: .75em;
-    left: .666rem;
-    width: 1.25em;
-    font-size: 1em;
+    top: 25%;
+    left: .3em;
+    width: 1em;
+    font-size: 1.25em;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .textarea-field-sm .form-group-inner-icon {
-    position: absolute;
-    top: .5em;
-    left: .666rem;
-    width: .75em;
-    font-size: 1.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1em;
 }
 
 .textarea-field-lg .form-group-inner-icon {
-    position: absolute;
-    top: .75em;
-    left: .666rem;
-    width: 1.25em;
-    font-size: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.75em;
 }
 </style>

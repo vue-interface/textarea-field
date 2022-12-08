@@ -18,7 +18,7 @@
 
             <h2 class="text-2xl mt-6 mb-3">Sizes</h2>
 
-            <textarea-field size="sm" label="Small" class="mb-3"></textarea-field>
+            <textarea-field v-model="value" size="sm" label="Small" class="mb-3"></textarea-field>
             <textarea-field size="md" label="Medium" class="mb-3"></textarea-field>
             <textarea-field size="lg" label="Large" class="mb-3"></textarea-field>
 
@@ -68,20 +68,9 @@
         <script type="module">
             import './index.css';
             import { createApp } from 'vue/dist/vue.esm-bundler';
-            import { TextareaField } from './index.js';
-            import { register, registry, Dots, Pulse, Spinner } from '@vue-interface/activity-indicator';
-            import { config } from '@vue-interface/form-control';
-
-            config({
-                animated: true
-            });
+            import { TextareaField } from './index';
+            import { ActivityIndicatorPlugin, Dots, Pulse, Spinner } from '@vue-interface/activity-indicator';
             
-            register({
-                Dots,
-                Pulse,
-                Spinner
-            });
-              
             const vue = createApp({
                 components: {
                     TextareaField
@@ -89,8 +78,15 @@
                 data() {
                     return {
                         showActivity: false,
-                        value: null
+                        value: 'asdf'
                     };
+                }
+            })
+            .use(ActivityIndicatorPlugin, {
+                indicators: {
+                    Dots,
+                    Pulse,
+                    Spinner
                 }
             })
             .mount('#app');
