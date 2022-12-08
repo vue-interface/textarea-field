@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { Autogrow } from '@vue-interface/autogrow';
 import { ActivityIndicator } from '@vue-interface/activity-indicator';
 import { FormControl } from '@vue-interface/form-control';
