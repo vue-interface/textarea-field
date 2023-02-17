@@ -61,6 +61,7 @@ export default defineComponent({
                 </div>
                 <textarea
                     ref="field"
+                    v-model="model"
                     v-autogrow="autogrow"
                     v-bind-events
                     v-bind="controlAttributes" />
