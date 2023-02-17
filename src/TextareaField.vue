@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Autogrow } from '@vue-interface/autogrow';
 import { ActivityIndicator } from '@vue-interface/activity-indicator';
+import { Autogrow } from '@vue-interface/autogrow';
 import { FormControl } from '@vue-interface/form-control';
 import { defineComponent } from 'vue';
 
@@ -16,9 +16,7 @@ export default defineComponent({
         ActivityIndicator
     },
 
-    mixins: [
-        FormControl
-    ],
+    extends: FormControl,
 
     props: {
         
@@ -27,14 +25,11 @@ export default defineComponent({
          *
          * @property Boolean
          */
-        autogrow: [Number, String, Boolean]
+        autogrow: {
+            type: [Number, String, Boolean],
+            default: false
+        }
 
-    },
-
-    data() {
-        return {
-            currentValue: this.value,
-        };
     }
 
 });
@@ -44,17 +39,24 @@ export default defineComponent({
     <div :class="formGroupClasses">
         <slot name="label">
             <label
-                v-if="label || $attrs.placeholder"
+                v-if="label"
                 ref="label"
                 :for="id"
-                :class="labelClass"
-                @click="focus"
-                v-html="label || $attrs.placeholder" />
+                :class="labelClass">
+                {{ label }}
+            </label>
         </slot>
 
         <div class="form-group-inner">
-            <slot name="control" :bind-events="bindEvents" :control-attributes="controlAttributes" :focus="focus">
-                <div v-if="$slots.icon" class="form-group-inner-icon" @click="focus">
+            <slot
+                name="control"
+                :bind-events="bindEvents"
+                :control-attributes="controlAttributes"
+                :focus="focus">
+                <div
+                    v-if="$slots.icon"
+                    class="form-group-inner-icon"
+                    @click="focus">
                     <slot name="icon" />
                 </div>
                 <textarea

@@ -10,15 +10,19 @@
             <h1 class="text-4xl mb-5">textarea-field</h1>
 
             <h2 class="text-2xl mt-6 mb-3">Basic Usage</h2>
+            
+            <div class="bg-gray-100 p-3 mb-3">
+                Value: {{ value }}
+            </div>
 
-            <textarea-field label="Textarea Field" placeholder="Type something here..." class="mb-3"></textarea-field>
+            <textarea-field v-model="value" label="Textarea Field" placeholder="Type something here..." class="mb-3"></textarea-field>
             <textarea-field label="Descriptive Textarea Field" placeholder="Type something here..." help-text="Some helpful text goes here." class="mb-3"></textarea-field>
             <textarea-field label="Plain Textarea" placeholder="Type something here..." class="mb-3" plaintext></textarea-field>
             <textarea-field label="Readonly" placeholder="Type something here..." class="mb-3" readonly></textarea-field>
 
             <h2 class="text-2xl mt-6 mb-3">Sizes</h2>
 
-            <textarea-field v-model="value" size="sm" label="Small" class="mb-3"></textarea-field>
+            <textarea-field size="sm" label="Small" class="mb-3"></textarea-field>
             <textarea-field size="md" label="Medium" class="mb-3"></textarea-field>
             <textarea-field size="lg" label="Large" class="mb-3"></textarea-field>
 
@@ -78,7 +82,7 @@
                 data() {
                     return {
                         showActivity: false,
-                        value: 'asdf'
+                        value: 'Testing...'
                     };
                 }
             })
