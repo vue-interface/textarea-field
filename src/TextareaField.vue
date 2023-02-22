@@ -79,17 +79,36 @@ export default defineComponent({
             </slot>
         </div>
 
-        <slot name="feedback">
-            <div 
-                v-if="invalidFeedback"
-                class="invalid-feedback"
-                invalid
-                v-html="invalidFeedback" />
-            <div 
-                v-else-if="validFeedback"
-                class="valid-feedback"
-                valid
-                v-html="validFeedback" />
+        <slot
+            name="errors"
+            v-bind="{ error, errors, id: $attrs.id, name: $attrs.name }">        
+            <FormControlErrors
+                v-if="!!(error || errors)"
+                :id="$attrs.id"
+                v-slot="{ error }"
+                :name="$attrs.name"
+                :error="error"
+                :errors="errors">
+                <div
+                    invalid
+                    class="invalid-feedback">
+                    {{ error }}<br>
+                </div>
+            </FormControlErrors>
+        </slot>
+        
+        <slot
+            name="feedback"
+            v-bind="{ feedback }">
+            <FormControlFeedback
+                v-slot="{ feedback }"
+                :feedback="feedback">
+                <div
+                    valid
+                    class="valid-feedback">
+                    {{ feedback }}
+                </div>
+            </FormControlFeedback>
         </slot>
 
         <slot name="help">
