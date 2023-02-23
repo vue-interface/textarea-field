@@ -18,6 +18,7 @@ export default defineConfig({
         rollupOptions: {
             external: [
                 '@vue-interface/activity-indicator',
+                '@vue-interface/autogrow',
                 '@vue-interface/form-control',
                 'vue',
             ],
