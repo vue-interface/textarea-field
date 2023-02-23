@@ -1,5 +1,5 @@
 import vue from '@vitejs/plugin-vue';
-import { pascalCase } from "change-case";
+import { pascalCase } from 'change-case';
 import path from 'path';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
@@ -16,10 +16,17 @@ export default defineConfig({
             fileName,
         },
         rollupOptions: {
-            external: ['vue'],
+            external: [
+                '@vue-interface/activity-indicator',
+                '@vue-interface/form-control',
+                'vue',
+            ],
             output: {
                 globals: {
-                    vue: 'Vue'
+                    '@vue-interface/activity-indicator': 'ActivityIndicator',
+                    '@vue-interface/autogrow': 'Autogrow',
+                    '@vue-interface/form-control': 'FormControl',
+                    'vue': 'Vue'
                 },
             }
         },
