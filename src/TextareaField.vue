@@ -68,14 +68,14 @@ export default defineComponent({
             </slot>
 
             <slot name="activity">
-                <transition name="textarea-field-fade">
-                    <activity-indicator
+                <Transition name="textarea-field-fade">
+                    <ActivityIndicator
                         v-if="activity"
                         key="activity"
                         ref="activity"
                         :type="indicator"
                         :size="indicatorSize || size" />
-                </transition>
+                </Transition>
             </slot>
         </div>
 
