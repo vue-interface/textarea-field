@@ -43,9 +43,9 @@
   },
   "homepage": "https://github.com/vue-interface/textarea-field",
   "dependencies": {
-    "@vue-interface/activity-indicator": "2.0.0-beta.17",
-    "@vue-interface/autogrow": "1.0.0-beta.4",
-    "@vue-interface/form-control": "1.0.0-beta.33"
+    "@vue-interface/activity-indicator": "^2.0.0-beta.17",
+    "@vue-interface/autogrow": "^1.0.0-beta.4",
+    "@vue-interface/form-control": "^1.0.0-beta.33"
   },
   "peerDependencies": {
     "vue": "^3.3.4"
@@ -57,7 +57,7 @@
     "@semantic-release/npm": "^10.0.5",
     "@types/color": "^3.0.3",
     "@vitejs/plugin-vue": "^4.3.3",
-    "@vue-interface/eslint-config": "1.0.0-beta.4",
+    "@vue-interface/eslint-config": "^1.0.0-beta.4",
     "autoprefixer": "^10.4.15",
     "change-case": "^4.1.2",
     "commitlint": "^17.7.1",
