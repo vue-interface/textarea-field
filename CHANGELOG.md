@@ -1,3 +1,10 @@
+# [1.0.0-beta.9](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2023-08-28)
+
+
+### Bug Fixes
+
+* updated package.json ([bc6d72c](https://github.com/vue-interface/textarea-field/commit/bc6d72c3508b15031b39fccc805aa0d7c903b075))
+
 # [1.0.0-beta.8](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2023-08-28)
 
 
