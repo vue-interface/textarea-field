@@ -70,11 +70,11 @@ export default defineComponent({
             <slot name="activity">
                 <Transition name="textarea-field-fade">
                     <ActivityIndicator
-                        v-if="activity"
+                        v-if="activity && indicator"
                         key="activity"
                         ref="activity"
                         :type="indicator"
-                        :size="indicatorSize || size" />
+                        :size="indicatorSize" />
                 </Transition>
             </slot>
         </div>
@@ -120,100 +120,3 @@ export default defineComponent({
         </slot>
     </div>
 </template>
-
-<style>
-.textarea-field,
-.textarea-field .form-group-inner {
-    position: relative;
-}
-
-.textarea-field .activity-indicator {
-    position: absolute;
-    right: 1rem;
-    transition: all .25s ease-in;
-}
-
-.textarea-field .activity-indicator-xs {
-    font-size: .5em;
-    top: .666rem;
-}
-
-.textarea-field.has-activity .form-control-xs {
-    padding-right: 3.75em;
-}
-
-.textarea-field .activity-indicator-sm {
-    font-size: .5em;
-    top: .666rem;
-}
-
-.textarea-field.has-activity .form-control-sm {
-    padding-right: 3.75em;
-}
-
-.textarea-field .activity-indicator-md {
-    font-size: .666em;
-    top: .875rem;
-}
-
-.textarea-field.has-activity .form-control-md {
-    padding-right: 3em;
-}
-
-.textarea-field .activity-indicator-lg {
-    font-size: .75em;
-    top: 1.15rem;
-}
-
-.textarea-field.has-activity .form-control-lg {
-    padding-right: 3em;
-}
-
-.textarea-field .activity-indicator-xl {
-    font-size: 1em;
-    top: 1.25rem;
-}
-
-.textarea-field.has-activity .form-control {
-    padding-right: 3em;
-}
-
-.textarea-field .activity-indicator {
-    opacity: 1;
-}
-
-.textarea-field .textarea-field-fade-enter,
-.textarea-field .textarea-field-fade-leave-to {
-    opacity: 0;
-}
-
-
-.textarea-field.is-valid .valid-feedback,
-.textarea-field.is-invalid .invalid-feedback {
-    display: flex;
-}
-
-.textarea-field .form-control-icon {
-    padding-left: 2em;
-}
-
-.textarea-field .form-group-inner-icon {
-    position: absolute;
-    top: 25%;
-    left: .3em;
-    width: 1em;
-    font-size: 1.25em;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.textarea-field-sm .form-group-inner-icon {
-    font-size: 1em;
-}
-
-.textarea-field-lg .form-group-inner-icon {
-    font-size: 1.75em;
-}
-</style>
