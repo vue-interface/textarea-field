@@ -16,9 +16,8 @@
             </div>
             
             <textarea-field v-model="value" label="Text Field" placeholder="Some placeholder" class="mb-3"></textarea-field>
-            <textarea-field type="password" label="Password Field" class="mb-3"></textarea-field>
+            <textarea-field label="Inner Text" class="mb-3" value="Some Inner Text Here"></textarea-field>
             <textarea-field label="Descriptive Text Field" help-text="Some helpful text goes here." class="mb-3"></textarea-field>
-            <textarea-field type="email" label="Email Field" placeholder="you@example.com" class="mb-3"></textarea-field>
             <textarea-field label="Plain Text" placeholder="Type something here..." class="mb-3" plaintext></textarea-field>
             <textarea-field label="Readonly" placeholder="Type something here..." class="mb-3" readonly></textarea-field>
             <textarea-field label="Readonly (Disabled)" placeholder="Type something here..." class="mb-3" readonly disabled></textarea-field>
@@ -76,17 +75,12 @@
             <h2 class="text-2xl mt-6 mb-3">Validation</h2>
 
             <textarea-field label="Empty Array of Errors" :errors="[]" class="mb-3"></textarea-field>
-
             <textarea-field label="Single Inline Error" error="This is an inline error." class="mb-3"></textarea-field>
-
             <textarea-field label="Array of Errors" :errors="['First Error', 'Second Error']" class="mb-3"></textarea-field>
-
             <textarea-field name="test" label="Multiple Errors From Object" :errors="{'test': ['This is an inline error #1.', 'This is an inline error #2.']}" class="mb-3"></textarea-field>
-        
+    
             <textarea-field label="Valid Field" valid class="mb-3"></textarea-field>
-
             <textarea-field label="Valid Field with Feedback" valid feedback="This is some success message." class="mb-3"></textarea-field>
-            
             <textarea-field label="Valid Field with Array of Feedback" valid :feedback="['This is some success message.', 'This is some success message.']" class="mb-3"></textarea-field>
         </form>
 
