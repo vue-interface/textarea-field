@@ -1,3 +1,10 @@
+# [1.0.0-beta.10](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2023-09-01)
+
+
+### Features
+
+* implemented new form control composable with better TS support ([4ac9434](https://github.com/vue-interface/textarea-field/commit/4ac9434d3a8a8e59594347e9077b3f3093ca2bb7))
+
 # [1.0.0-beta.9](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2023-08-28)
 
 
