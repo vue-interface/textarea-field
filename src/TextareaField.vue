@@ -23,7 +23,7 @@ const {
     onClick,
     onBlur,
     onFocus
-} = useFormControl(props, emit);
+} = useFormControl({props, emit});
 
 const field = ref<HTMLTextAreaElement>();
 </script>
