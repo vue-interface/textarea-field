@@ -44,7 +44,7 @@
   "homepage": "https://github.com/vue-interface/textarea-field",
   "dependencies": {
     "@vue-interface/activity-indicator": "^2.0.0-beta.17",
-    "@vue-interface/autogrow": "^1.0.0-beta.4",
+    "@vue-interface/autogrow": "^1.0.0-beta.5",
     "@vue-interface/form-control": "^1.0.0-beta.43"
   },
   "peerDependencies": {

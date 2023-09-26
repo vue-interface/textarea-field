@@ -1,5 +1,7 @@
 <script setup lang="ts" generic="T, V">
-import type { CheckedFormControlProps, FormControlEvents, FormControlSlots } from '@vue-interface/form-control';
+import { ActivityIndicator } from '@vue-interface/activity-indicator';
+import { vAutogrow } from '@vue-interface/autogrow';
+import type { FormControlEvents, FormControlProps, FormControlSlots } from '@vue-interface/form-control';
 import { FormControlErrors, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
 import { ref, useSlots } from 'vue';
 
@@ -11,7 +13,12 @@ defineSlots<FormControlSlots<T>>();
 
 const emit = defineEmits<FormControlEvents<T>>();
 
-const props = withDefaults(defineProps<CheckedFormControlProps<T, V>>(), {
+type TextareaFieldProps = FormControlProps<T,V> & {
+    autogrow?: boolean
+}
+
+const props = withDefaults(defineProps<TextareaFieldProps>(), {
+    autogrow: true,
     formControlClass: 'form-control',
     labelClass: 'form-label'
 });
@@ -23,7 +30,7 @@ const {
     onClick,
     onBlur,
     onFocus
-} = useFormControl({props, emit});
+} = useFormControl({ props, emit });
 
 const field = ref<HTMLTextAreaElement>();
 </script>
@@ -55,6 +62,7 @@ const field = ref<HTMLTextAreaElement>();
                 <textarea
                     ref="field"
                     v-model="model"
+                    v-autogrow="autogrow"
                     v-bind="controlAttributes"
                     @click="onClick"
                     @blur="onBlur"
