@@ -1,3 +1,11 @@
+# [1.0.0-beta.11](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2023-09-26)
+
+
+### Bug Fixes
+
+* issues with new form-control ([0249822](https://github.com/vue-interface/textarea-field/commit/0249822a1f6f483c536e97e21227c07afeebdb4d))
+* updated to latest form-control ([b41726c](https://github.com/vue-interface/textarea-field/commit/b41726cd120cb0afb516acd2ed379d889c2ff2bc))
+
 # [1.0.0-beta.10](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2023-09-01)
 
 
