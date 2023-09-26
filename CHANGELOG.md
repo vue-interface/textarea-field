@@ -1,3 +1,10 @@
+# [1.0.0-beta.12](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2023-09-26)
+
+
+### Bug Fixes
+
+* updated tsconfig ([e579930](https://github.com/vue-interface/textarea-field/commit/e579930379b5b94bcac1800947f2c732fa98ea69))
+
 # [1.0.0-beta.11](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2023-09-26)
 
 
