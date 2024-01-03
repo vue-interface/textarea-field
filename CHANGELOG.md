@@ -1,3 +1,10 @@
+# [1.0.0-beta.14](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2024-01-03)
+
+
+### Bug Fixes
+
+* added src to files in package.json ([1c7d617](https://github.com/vue-interface/textarea-field/commit/1c7d617d5ede37e94aab988177514a521c80a7b3))
+
 # [1.0.0-beta.13](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2023-09-26)
 
 
