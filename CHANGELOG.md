@@ -1,3 +1,10 @@
+# [1.0.0-beta.15](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2024-02-29)
+
+
+### Bug Fixes
+
+* issue with field not showing laravel style errors ([b4e3178](https://github.com/vue-interface/textarea-field/commit/b4e3178449d5d729da7f76634f7bd401071e954e))
+
 # [1.0.0-beta.14](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2024-01-03)
 
 
