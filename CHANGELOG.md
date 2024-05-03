@@ -1,3 +1,10 @@
+# [1.0.0-beta.16](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2024-05-03)
+
+
+### Bug Fixes
+
+* use latest autogrow dep ([51027fa](https://github.com/vue-interface/textarea-field/commit/51027fa7e0c8650e6b4eb21dd39c02f1d34b33f1))
+
 # [1.0.0-beta.15](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2024-02-29)
 
 
