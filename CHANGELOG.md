@@ -1,3 +1,10 @@
+# [1.0.0-beta.17](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2024-05-23)
+
+
+### Bug Fixes
+
+* fixed issues with animated fields ([690ba6b](https://github.com/vue-interface/textarea-field/commit/690ba6bfe71150f52b8028c5617627bda7d12f7e))
+
 # [1.0.0-beta.16](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2024-05-03)
 
 
