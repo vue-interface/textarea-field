@@ -127,6 +127,11 @@
                         showActivity: false,
                         value: 'Testing...'
                     };
+                },
+                mounted() {
+                    setTimeout(() => {
+                        this.value += '\n\n\n Adding some text for resize...'
+                    }, 1000)
                 }
             })
             .use(ActivityIndicatorPlugin, {

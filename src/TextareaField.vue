@@ -3,7 +3,7 @@ import { ActivityIndicator } from '@vue-interface/activity-indicator';
 import { vAutogrow } from '@vue-interface/autogrow';
 import type { FormControlEvents, FormControlProps, FormControlSlots } from '@vue-interface/form-control';
 import { FormControlErrors, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
-import { ref, useSlots } from 'vue';
+import { ref, useSlots, watch } from 'vue';
 
 defineOptions({
     inheritAttrs: false
@@ -33,6 +33,10 @@ const {
 } = useFormControl({ props, emit });
 
 const field = ref<HTMLTextAreaElement>();
+
+watch(model, () => {
+    field.value.dispatchEvent(new Event('resize'));
+})
 </script>
 
 <template>
@@ -56,7 +60,7 @@ const field = ref<HTMLTextAreaElement>();
                 <div
                     v-if="useSlots().icon"
                     class="form-group-inner-icon"
-                    @click="field.focus">
+                    @click="() => field.focus()">
                     <slot name="icon" />
                 </div>
                 <textarea
