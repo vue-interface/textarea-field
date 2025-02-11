@@ -1,3 +1,10 @@
+# [1.0.0-beta.18](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2025-02-11)
+
+
+### Bug Fixes
+
+* fix issue with autogrow not resizing on model update ([34c5ebe](https://github.com/vue-interface/textarea-field/commit/34c5ebe7d4a1e160785630c736a7c648567966ac))
+
 # [1.0.0-beta.17](https://github.com/vue-interface/textarea-field/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2024-05-23)
 
 
